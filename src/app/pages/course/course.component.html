@@ -1,0 +1,63 @@
+<div>
+
+    <h1>Course Manager</h1>
+
+    <h3>Create</h3>
+
+    <form (ngSubmit)="create()" #courseForm="ngForm">
+        
+        <label>
+            Name:
+            <input type="text" [(ngModel)]="course.name" name="name" required />
+        </label>
+        
+        <label>
+            Code:
+            <input type="text" minlength="2" maxlength="2" [(ngModel)]="course.code" name="code" required />
+        </label>
+
+        <label>
+            Duration:
+            <input type="number" min="0" [(ngModel)]="course.duration" name="duration" />
+        </label>
+
+        <label>
+            Description:
+            <input type="text" [(ngModel)]="course.description" name="description"/>
+        </label>
+
+        <button type="submit"> Create </button>
+
+    </form>
+
+    <h3>Read</h3>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Duration</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let c of courses">
+                <td>{{ c.id }}</td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.code }}</td>
+                <td>{{ c.duration }}</td>
+                <td>{{ c.description }}</td>
+                <!-- <td>
+                    <button (click)="edit(u)">Edit</button>
+                    <button (click)="delete(u.id)">Delete</button>
+                </td> -->
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>

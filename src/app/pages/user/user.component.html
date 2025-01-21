@@ -1,0 +1,54 @@
+<div>
+
+    <h1>User Manager</h1>
+
+    <h3>Create</h3>
+
+    <form (ngSubmit)="create()" #userForm="ngForm">
+        
+        <label>
+            Name:
+            <input type="text" [(ngModel)]="user.name" name="name" required />
+        </label>
+        
+        <label>
+            Email:
+            <input type="email" [(ngModel)]="user.email" name="email" required />
+        </label>
+
+        <label>
+            Password:
+            <input type="password" [(ngModel)]="user.password" name="password" required />
+        </label>
+
+        <button type="submit"> Create </button>
+
+    </form>
+
+    <h3>Read</h3>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>{{ u.id }}</td>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>
+                    <button [routerLink]="['/admin/user', u.id]">Edit</button>
+                    <button (click)="delete(u.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
