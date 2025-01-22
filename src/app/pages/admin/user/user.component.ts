@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 

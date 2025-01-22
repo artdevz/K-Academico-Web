@@ -1,0 +1,25 @@
+<div>
+
+    <h1>Student Manager</h1>
+
+    <h3>Create</h3>
+
+    <form (ngSubmit)="create()" #studenForm="ngForm">
+
+        <label>
+            User ID:
+            <input type="text" [(ngModel)]="student.id" name="user" required />
+        </label>
+
+        <label>
+            Course ID:
+            <input type="text" [(ngModel)]="course.id" name="course" required />
+        </label>
+
+        <select name="Shift" id="">
+            
+        </select>
+
+    </form>
+
+</div>
