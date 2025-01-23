@@ -8,17 +8,21 @@
 
         <label>
             User ID:
-            <input type="text" [(ngModel)]="student.id" name="user" required />
+            <input type="text" [(ngModel)]="student.user" name="user" required />
         </label>
 
         <label>
             Course ID:
-            <input type="text" [(ngModel)]="course.id" name="course" required />
+            <input type="text" [(ngModel)]="student.course" name="course" required />
         </label>
 
         <select name="Shift" id="">
-            
+            <option value="MORNING">Morning</option>
+            <option value="AFTERNOON">Afternoon</option>
+            <option value="NIGHT">Night</option>
         </select>
+
+        <button type="submit"> Create </button>
 
     </form>
 

@@ -12,15 +12,15 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  create(user: User): Observable<User> {
-    return this.http.post<User>(this.api, user);
+  create(user: User): Observable<string> {
+    return this.http.post<string>(this.api, user, { responseType: "text" as "json" } );
   }
   
   readAll(): Observable<User[]> {
     return this.http.get<User[]>(this.api);
   }
 
-  readId(id: string): Observable<User> {
+  readById(id: string): Observable<User> {
     return this.http.get<User>(`${this.api}/${id}`);
   }
 
@@ -29,6 +29,8 @@ export class UserService {
   }
 
   delete(id: string): Observable<void> {
+    console.log(id);
+    console.log(`${this.api}/${id}`);
     return this.http.delete<void>(`${this.api}/${id}`);
   }
 

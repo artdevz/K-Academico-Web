@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit {
 
   loadUserDetails(): void {
     
-    this.userS.readId(this.id).subscribe({
+    this.userS.readById(this.id).subscribe({
       next: (data) => {
         this.user = data; 
       },

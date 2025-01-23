@@ -25,9 +25,9 @@ export class UserComponent implements OnInit {
 
   create(): void {
     this.userS.create(this.user).subscribe(() => {
+      // this.user = new 
       this.readAll();
-      this.user = new User("", "", "", "");
-    })
+    });
   }
 
   readAll(): void {
@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
   }
 
   delete(id: string): void {
+    console.log(id);
     this.userS.delete(id);
   }
 
