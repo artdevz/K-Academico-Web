@@ -12,35 +12,22 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-
-  loginData = {
-    email: "", password: ""
-  };
-
+  loginData = { email: '', password: '' };
   isLoading = false;
   errorMessage: string | null = null;
 
-  constructor(private loginS: LoginService, private router: Router) {}
-
-  redirectTo(route: string): void {
-    this.router.navigate([route]);
-  }
+  constructor(private loginService: LoginService, private router: Router) {}
 
   login(): void {
-
     this.isLoading = true;
     this.errorMessage = null;
 
-    const { email, password } = this.loginData;
-
-    this.loginS.login(email, password).subscribe({
+    this.loginService.login(this.loginData.email, this.loginData.password).subscribe({
       next: (token: string) => {
         console.log("Login Successful: ", token);
+        this.loginService.storeToken(token);
         this.isLoading = false;
-
-        localStorage.setItem("authToken", token);
-
-        this.redirectTo("");        
+        this.router.navigate(['']);
       },
       error: (error) => {
         console.error("Login failed: ", error);
@@ -48,7 +35,5 @@ export class LoginComponent {
         this.isLoading = false;
       }
     });
-
   }
-
 }

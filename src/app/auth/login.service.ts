@@ -6,38 +6,42 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-
-  private api = "http://localhost:8080/api/auth/login"
-  private TOKEN = "jwt";
+  private readonly API_URL = "http://localhost:8080/api/auth/login";
+  private readonly TOKEN_KEY = "authToken";
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<string> {
-    const payload = { email, password };
-    return this.http.post<string>(this.api, payload, { responseType: "text" as "json" });
+    return this.http.post<string>(this.API_URL, { email, password }, { responseType: "text" as "json" });
+  }
+
+  storeToken(token: string): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(this.TOKEN_KEY, token);
+    }
   }
 
   getToken(): string | null {
-    if (typeof window !== 'undefined' && window.localStorage) return localStorage.getItem(this.TOKEN);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem(this.TOKEN_KEY);
+    }
     return null;
   }
 
-  getDecodedToken(): any | null {
+  decodeToken(): any | null {
     const token = this.getToken();
     if (!token) return null;
     try {
-      const payload = token.split('.')[1];
-      return JSON.parse(atob(payload));
-    }
+      return JSON.parse(atob(token.split('.')[1]));
+    } 
     catch (error) {
-      console.error("Error at decoded Token");
+      console.error("Error decoding token", error);
       return null;
     }
   }
 
-  getLoggedInUser(): any | null {
-    const decodedToken = this.getDecodedToken();
-    return decodedToken ? { id: decodedToken.id, name: decodedToken.name, email: decodedToken.email, password: "" } : null;
+  getLoggedInUser(): { id: string; name: string; email: string, password: string } {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? { id: decodedToken.id, name: decodedToken.username, email: decodedToken.sub, password: "" } : {id:"", name:"", email:"", password:""};
   }
-
 }
