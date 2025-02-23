@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../../models/user';
-import { UserService } from '../../../services/user.service';
+import { User } from '../../../../models/users/user';
+import { UserService } from '../../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -36,8 +36,15 @@ export class UserComponent implements OnInit {
   }
 
   delete(id: string): void {
-    this.userS.delete(id);
-    this.readAll();
+    this.userS.delete(id).subscribe({
+      next: msg => {
+        this.readAll();
+        alert(msg);
+      },
+      error: err => {
+        alert(err + "Error at Delete.");
+      }
+    })
   }
 
 }

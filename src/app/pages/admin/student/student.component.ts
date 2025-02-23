@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Student } from '../../../models/student';
+import { Student } from '../../../models/students/student';
 import { StudentService } from '../../../services/student.service';
 
 @Component({

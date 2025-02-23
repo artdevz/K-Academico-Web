@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginService } from '../../auth/auth.service';
+import { LoginService } from '../../auth/login.service';
 import { UserService } from '../../services/user.service';
 
 @Component({

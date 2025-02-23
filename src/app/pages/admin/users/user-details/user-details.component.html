@@ -12,7 +12,7 @@
     </div>
 
     <h3>Edit:</h3>
-    <form (ngSubmit)="edit()" #userForm="ngForm" *ngIf="user">
+    <form (ngSubmit)="update()" #userForm="ngForm" *ngIf="user">
         
         <div>
             <label>
@@ -21,19 +21,12 @@
             </label>
         </div>
 
-        <div>
-            <label>
-                Email:
-                <input type="email" [(ngModel)]="user.email" name="email" required />
-            </label>
-        </div>
-
-        <div>
+        <!-- <div>
             <label>
                 Password:
                 <input type="password" [(ngModel)]="user.password" name="password" required />
             </label>
-        </div>
+        </div> -->
 
         <div>
             <button type="submit" [disabled]="!userForm.form.valid">Edit</button>
