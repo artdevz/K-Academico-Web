@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { LoginService } from '../../auth/login.service';
+import { LoginService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -20,12 +20,12 @@ export class AcademicHistoryComponent implements OnInit {
   constructor(private authS: LoginService, private router: Router, private userS: UserService) {}
   
     ngOnInit(): void {
-      this.user = this.authS.getLoggedInUser();
+      /* this.user = this.authS.getLoggedInUser();
       if (this.authS.getLoggedInUser().id == "") this.router.navigate(["/auth/login"]);
       
       if (this.authS.getLoggedInUser().id != "") {
         // this.courseName = this.userS.readById(this.user.id)
-      }
+      } */
 
     }
 

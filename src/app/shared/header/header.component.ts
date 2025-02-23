@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
-import { LoginService } from '../../auth/login.service';
+import { LoginService } from '../../auth/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,12 +12,24 @@ import { LoginService } from '../../auth/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user: User = new User("", "", "", "");
+  userName: string | null = null;
 
-  constructor(private authS: LoginService) {}
+  constructor(private authS: LoginService, private userS: UserService) {}
 
   ngOnInit(): void {
-    this.user = this.authS.getLoggedInUser();
+    this.userS.readById(this.authS.getLoggedInUser() ?? "").subscribe({
+
+      next: data => {
+        this.userName = data.name;
+      },
+
+      error: err => {
+        console.error(err + "Error at Get User ID.");
+      }
+
+    });
   }
+
+  logout(): void {}
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { LoginService } from '../../auth/login.service';
+import { LoginService } from '../../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -18,10 +18,10 @@ export class DashboardComponent implements OnInit {
   constructor(private authS: LoginService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.authS.getLoggedInUser();
+    /*this.user = this.authS.getLoggedInUser();
     if (this.authS.getLoggedInUser().id == "") {
       this.router.navigate(["/auth/login"]);
-    }
+    }*/
   }
 
 }

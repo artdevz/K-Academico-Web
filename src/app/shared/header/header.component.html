@@ -1,9 +1,5 @@
-<header class="header">
+<h1>K-Academic</h1>
 
-    <h1><strong>K-Acadêmico</strong></h1>
+<span *ngIf="userName">Welcome, {{ userName }}</span>
 
-    <div *ngIf="user">
-        <p><strong>Name: {{ user.name }} </strong></p>
-    </div>
-
-</header>
+<button class="btn-logout" *ngIf="userName" (click)="logout()">Logout</button>
