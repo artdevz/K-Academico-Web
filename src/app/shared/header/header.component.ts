@@ -17,19 +17,22 @@ export class HeaderComponent implements OnInit {
   constructor(private authS: LoginService, private userS: UserService) {}
 
   ngOnInit(): void {
-    this.userS.readById(this.authS.getLoggedInUser() ?? "").subscribe({
-
-      next: data => {
-        this.userName = data.name;
-      },
-
-      error: err => {
-        console.error(err + "Error at Get User ID.");
+    this.authS.loggedInUser$.subscribe(userID => {
+      if (userID) {
+        this.userS.readById(userID).subscribe({
+          next: data => this.userName = data.name,
+          error: err => console.error("Error at Get User ID.", err)
+        });
       }
-
-    });
+      else {
+        this.userName = null;
+      }
+    });     
   }
 
-  logout(): void {}
+  logout(): void {
+    this.authS.logout();    
+    window.location.reload();
+  }
 
 }

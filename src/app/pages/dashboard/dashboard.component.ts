@@ -13,15 +13,15 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  user: User = new User("", "", "", "");
+  userId: string | null = null;
 
   constructor(private authS: LoginService, private router: Router) {}
 
   ngOnInit(): void {
-    /*this.user = this.authS.getLoggedInUser();
-    if (this.authS.getLoggedInUser().id == "") {
-      this.router.navigate(["/auth/login"]);
-    }*/
+    const userID = this.authS.getLoggedInUser();
+    
+    if (!userID) this.router.navigate(["/auth/login"]);
+
   }
 
 }
