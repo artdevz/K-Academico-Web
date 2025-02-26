@@ -1,18 +1,18 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/users/user';
 import { LoginService } from '../../auth/login.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-academic-history',
+  selector: 'app-transcript',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './academic-history.component.html',
-  styleUrl: './academic-history.component.scss'
+  templateUrl: './transcript.component.html',
+  styleUrl: './transcript.component.scss'
 })
-export class AcademicHistoryComponent implements OnInit {
+export class TranscriptComponent implements OnInit {
 
   user: User = new User("", "", "", "");
   courseName!: string;

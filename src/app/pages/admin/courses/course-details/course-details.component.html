@@ -1,0 +1,48 @@
+<div>
+
+    <h1>Course Details</h1>
+
+    <h3>Info:</h3>
+    
+    <div *ngIf="courseDetails">
+        <p><strong>ID:</strong> {{ courseDetails.summary.id }}</p>        
+        <p><strong>Name:</strong> {{ courseDetails.summary.name }}</p>
+        <p><strong>Code:</strong> {{ courseDetails.summary.code }}</p>
+        <p><strong>Duration:</strong> {{ courseDetails.summary.duration }}</p>
+        <p><strong>Description:</strong> {{ courseDetails.summary.description }}</p>
+    
+        <p>Subjects by Semester:</p>
+            <div *ngFor="let semester of getSortedSemesters()">
+                <h4>Semester {{ semester }}:</h4>
+                <ul>
+                    <li *ngFor="let subject of groupedSubjects[semester]">
+                        <strong>Name:</strong> {{ subject.name }} <br>
+                        <strong>Description:</strong> {{ subject.description }} <br>
+                        <strong>Duration:</strong> {{ subject.duration }} hours <br>
+                    </li>
+                </ul>
+            </div>
+
+    </div>
+
+    <h3>Edit:</h3>
+    <form (ngSubmit)="update()" #courseForm="ngForm" *ngIf="courseDetails">
+        
+        <div>
+            <label>
+                Name:
+                <input type="text" [(ngModel)]="courseRequest.name" name="name" required />
+            </label>
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="!courseForm.form.valid">Edit</button>
+        </div>
+
+        <div>
+            <button [routerLink]="['/admin/course']">Back</button>
+        </div>
+
+    </form>
+
+</div>

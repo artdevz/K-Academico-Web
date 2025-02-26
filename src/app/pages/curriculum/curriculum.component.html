@@ -1,0 +1,16 @@
+<div *ngIf="course">
+    <p>Course: {{ course.summary.name }}</p>
+
+    <p>Subjects:</p>
+        <div *ngFor="let semester of getSortedSemesters()">
+            <h4>Semester {{ semester }}:</h4>
+            <ul>
+                <li *ngFor="let subject of groupedSubjects[semester]">
+                    <strong>Name:</strong> {{ subject.name }} <br>
+                    <strong>Description:</strong> {{ subject.description }} <br>
+                    <strong>Duration:</strong> {{ subject.duration }} hours <br>
+                </li>
+            </ul>
+        </div>
+
+</div>

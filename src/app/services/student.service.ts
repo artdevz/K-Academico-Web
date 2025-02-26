@@ -8,28 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class StudentService {
 
-  private api = "http://localhost:8080/api/student";
+  private API = "http://localhost:8080/api/student";
   
   constructor(private http: HttpClient) {}
 
-  create(student: Student): Observable<Student> {
-    return this.http.post<Student>(this.api, student);
+  create(request: Student): Observable<string> {
+    return this.http.post<string>(this.API, request, { responseType: "text" as "json" } );
   }
-
+  
   readAll(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.api);
+    return this.http.get<Student[]>(this.API);
   }
 
   readById(id: string): Observable<Student> {
-      return this.http.get<Student>(`${this.api}/${id}`);
+    return this.http.get<Student>(this.API+"/"+id);
   }
 
-  update(student: Student): Observable<Student> {
-    return this.http.patch<Student>(`${this.api}/${student.id}`, student);
+  update(id: string, request: Student): Observable<string> {
+    return this.http.patch<string>(this.API+"/"+id, request, {responseType: "text" as "json"});
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.api}/${id}`);
+  delete(id: string): Observable<string> {
+    return this.http.delete<string>(this.API+"/"+id, { responseType: "text" as "json" } );
   }
 
 }

@@ -1,0 +1,8 @@
+<button class="toggleBtn" (click)="toggleSidebar()">☰</button>
+<div class="container" *ngIf="sidebar">
+    <nav>
+        <ul>
+            <li><a routerLink="/curriculum" routerLinkActive="active-link">Curriculum</a></li>
+        </ul>
+    </nav>
+</div>

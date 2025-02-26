@@ -51,10 +51,10 @@
                 <td>{{ c.code }}</td>
                 <td>{{ c.duration }}</td>
                 <td>{{ c.description }}</td>
-                <!-- <td>
-                    <button (click)="edit(u)">Edit</button>
-                    <button (click)="delete(u.id)">Delete</button>
-                </td> -->
+                <td>
+                    <button [routerLink]="['/admin/course', c.id]">Edit</button>
+                    <button (click)="delete(c.id)">Delete</button>
+                </td>
             </tr>
         </tbody>
 
