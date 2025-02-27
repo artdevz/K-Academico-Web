@@ -1,5 +1,7 @@
 <div *ngIf="course">
-    <p>Course: {{ course.summary.name }}</p>
+    <h1>{{ course.summary.name }}</h1>
+    <h3>{{ course.summary.duration}} Hours</h3>
+    <h4>Description: {{ course.summary.description }}</h4>
 
     <p>Subjects:</p>
         <div *ngFor="let semester of getSortedSemesters()">

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { catchError, Observable, switchMap } from 'rxjs';
 import { CourseDetailsDTO } from '../../models/courses/course-details-dto';
 import { Subject } from '../../models/subjects/subject';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-curriculum',
@@ -22,11 +23,13 @@ export class CurriculumComponent implements OnInit {
   constructor(
     private authS: LoginService,
     private studentS: StudentService,
-    private courseS: CourseService
+    private courseS: CourseService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
-    
+    this.titleService.setTitle("Kacademic - Curriculum");
+
     this.authS.loggedInUser$.pipe(
       switchMap(userID => {
         if (userID) {
