@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+  
+.main-box {
+    background-color: #0e0f16;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px; 
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+.main-box h1 {
+    margin-bottom: 10px;
+}
+  
+.main-box label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+  
+.main-box select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  
+.enrollee-list {
+    width: 100%;
+    max-width: 600px;
+}
+
+.enrollee {
+    background-color: #141620;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+  
+.enrollee .grade {
+    margin-bottom: 10px;
+}
+  
+.enrollee h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+  
+.enrollee h3 {
+    font-size: 18px;
+    color: rgb(174, 179, 184);
+}
+  
+.enrollee ul {
+    list-style-type: none;
+    padding: 0;
+}
+  
+.enrollee li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.tabs button {
+    background-color: transparent;
+    border: none;
+    color: aliceblue;
+    padding: 10px;
+    flex-grow: 1;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tabs button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgb(168, 210, 247);
+}
+
+.tabs button.active {
+    background-color: #007bff;
+    color: aliceblue;
+}

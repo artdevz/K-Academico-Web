@@ -14,7 +14,7 @@ import { StudentService } from '../../../services/student.service';
 export class StudentComponent implements OnInit {
 
   students: Student[] = [];
-  student: Student = new Student("", "", "");
+  student: Student = new Student("", "", "", [], "", 0);
 
   constructor(private studentS: StudentService) {}
 
@@ -25,7 +25,7 @@ export class StudentComponent implements OnInit {
   create(): void {
     this.studentS.create(this.student).subscribe(() => {
       this.readAll();
-      this.student = new Student("", "", "");
+      this.student = new Student("", "", "", [], "", 0);
     });
   }
 

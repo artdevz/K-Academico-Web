@@ -8,7 +8,7 @@ import { Subject } from '../models/subjects/subject';
 })
 export class SubjectService {
 
-  private api = "http://localhost:8080/api/student";
+  private api = "http://localhost:8080/api/subject";
     
   constructor(private http: HttpClient) {}
 

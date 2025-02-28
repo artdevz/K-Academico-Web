@@ -1,1 +1,51 @@
-<p>gradebook works!</p>
+<div class="container">
+
+    <div class="main-box">
+        <h1>Course Name</h1>
+        <label for="period">Period:</label>
+        <select name="period" id="period">
+            <option value="25.1">25.1</option> <!-- Enum -->
+        </select>
+    </div>
+
+    <div class="enrollee-list">
+
+        <div *ngFor="let enrollee of enrollees; let i = index" class="enrollee">
+            
+            <div class="grade" (click)="toggleDetails(i)">
+                <h2> <strong>{{ enrollee.gradeName }}</strong> </h2>
+                <h3> {{ enrollee.professorName }} </h3>
+                Gráfico Circular das Faltas/Presenças/Pendentes/Abonadas/Futuras com a % das Presenças em Relação as Aulas já passadas.
+            </div>
+
+            <div *ngIf="selectedEnrolleeIndex === i">
+
+                <div class="tabs">
+                    <button (click)="selectTab('summary')">Summary</button>
+                    <button (click)="selectTab('evaluations')">Evaluations</button>
+                    <button (click)="selectTab('classes')">Classes</button>
+                </div>
+
+                <div *ngIf="selectedTab === 'summary'">
+                    <ul>                
+                        <li>Avarage: {{ enrollee.summary.avarage }}</li>
+                        <li>Absences: {{ enrollee.summary.absences }}</li>
+                        <li>Status: {{ enrollee.summary.status }}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="selectedTab === 'evaluations'">
+                    <p>Evalutions tab :D</p>
+                </div>
+
+                <div *ngIf="selectedTab === 'classes'">
+                    <p>Classes tab :D</p>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+</div>
