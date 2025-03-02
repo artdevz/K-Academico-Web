@@ -7,6 +7,7 @@ import { catchError, Observable, switchMap } from 'rxjs';
 import { CourseDetailsDTO } from '../../models/courses/course-details-dto';
 import { Subject } from '../../models/subjects/subject';
 import { Title } from '@angular/platform-browser';
+import { Student } from '../../models/students/student';
 
 @Component({
   selector: 'app-curriculum',
@@ -19,6 +20,7 @@ export class CurriculumComponent implements OnInit {
 
   course: CourseDetailsDTO | null = null;
   groupedSubjects: { [semester: number]: Subject[] } = {};
+  studentHA!: Student;
 
   constructor(
     private authS: LoginService,
@@ -34,7 +36,7 @@ export class CurriculumComponent implements OnInit {
       switchMap(userID => {
         if (userID) {
           return this.studentS.readById(userID).pipe(            
-            switchMap(student => this.courseS.readById(student.course)),
+            switchMap(student => this.courseS.readById(student.summary.course)),
             catchError(err => {
               console.error('Error fetching course:', err);
               throw err;
