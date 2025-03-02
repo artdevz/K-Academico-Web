@@ -13,6 +13,7 @@ import { UserService } from '../../services/user.service';
 import { EnrolleeService } from '../../services/enrollee.service';
 import { Enrollee } from '../../models/enrollees/enrollee';
 import { ExamService } from '../../services/exam.service';
+import { LessonService } from '../../services/lesson.service';
 
 @Component({
   selector: 'app-gradebook',
@@ -26,6 +27,7 @@ export class GradebookComponent implements OnInit {
   enrollees: EnrolleeDetailsDTO[] = [];
   selectedEnrolleeIndex: number | null = null;
   examDetailsMap: { [examId: string]: any } = {};
+  lessonDetailsMap: { [lessonId: string]: any } = {};
   selectedTab: string = 'summary'; // Default Tab
 
   constructor(
@@ -37,7 +39,8 @@ export class GradebookComponent implements OnInit {
     private professorService: ProfessorService,
     private userService: UserService,
     private enrolleeService: EnrolleeService,
-    private examService: ExamService
+    private examService: ExamService,
+    private lessonService: LessonService
   ) {}
 
   ngOnInit(): void {
@@ -99,11 +102,17 @@ export class GradebookComponent implements OnInit {
             enrolleeDetails.evaluations?.forEach(evaluation => {
               this.getExamDetails(evaluation.exam).subscribe();
             });
+
+            enrolleeDetails.attendances?.forEach(attendance => {
+              this.getLessonDetails(attendance.lesson).subscribe();
+            })
+
             return new EnrolleeDetailsDTO(
               enrollee,
               subject.name,
               user.name,
-              enrolleeDetails.evaluations || []
+              enrolleeDetails.evaluations || [],
+              enrolleeDetails.attendances || []
             );
           }) 
         );       
@@ -159,6 +168,22 @@ export class GradebookComponent implements OnInit {
 
   }
 
+  private getLessonDetails(lessonId: string) {
+    console.log("ExamMap: ", this.examDetailsMap)
+    console.log("LessonMap: ", this.lessonDetailsMap)
+    if (this.lessonDetailsMap[lessonId]) return of(this.lessonDetailsMap[lessonId]);
+
+    return this.lessonService.readById(lessonId).pipe(
+      tap(lessonDetails => {
+        this.lessonDetailsMap[lessonId] = lessonDetails;
+      }),
+      catchError(err => {
+        console.error(`Error fetching lesson details for lesson ID ${lessonId}:`, err);
+        return of(null);
+      })
+    )
+  }
+
   getSortedEvaluations(): any[] {
     const selectedEnrollee = this.enrollees[this.selectedEnrolleeIndex || 0];
     return selectedEnrollee?.evaluations?.sort((a, b) => {
@@ -166,6 +191,15 @@ export class GradebookComponent implements OnInit {
       const examNameB = this.examDetailsMap[b.exam]?.name || '';
       return examNameA.localeCompare(examNameB);
     }) || [];
+  }
+
+  getSortedAttendances(): any[] {
+    const selectedEnrollee = this.enrollees[this.selectedEnrolleeIndex || 0];
+    return selectedEnrollee?.attendances?.sort((a, b) => {
+      const lessonDateA = this.lessonDetailsMap[a.lesson]?.date || '';
+      const lessonDateB = this.lessonDetailsMap[b.lesson]?.date || '';
+      return lessonDateA.localeCompare(lessonDateB);
+    })
   }
 
   toggleDetails(index: number): void {

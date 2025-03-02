@@ -1,3 +1,4 @@
+import { Attendance } from "../attendances/attendance";
 import { Evaluation } from "../evaluations/evaluation";
 
 export class Enrollee {
@@ -7,6 +8,7 @@ export class Enrollee {
     student: string;
     transcript: string;
     evaluations: Evaluation[] = [];
+    attendances: Attendance[] = [];
     absences: number;
     avarage: number;
     status: number;
@@ -17,6 +19,7 @@ export class Enrollee {
         student: string,
         transcript: string,
         evaluations: Evaluation[] = [],
+        attendances: Attendance[] = [],
         absences: number,
         avarage: number,
         status: number
@@ -26,6 +29,7 @@ export class Enrollee {
         this.student = student;
         this.transcript = transcript;
         this.evaluations = evaluations;
+        this.attendances = attendances;
         this.absences = absences;
         this.avarage = avarage;
         this.status = status;

@@ -96,6 +96,24 @@
 
                 <div *ngIf="selectedTab === 'classes'">
                     <h3>Classes</h3>
+                    
+                    <ng-container *ngIf="selectedEnrolleeIndex !== null && enrollees?.[selectedEnrolleeIndex] as selectedEnrollee">
+                        <ul *ngIf="selectedEnrollee?.attendances?.length && selectedEnrollee.attendances.length > 0; else noAttendances">
+                            <li *ngFor="let attendance of getSortedAttendances(); let i = index">                               
+                                <h4>
+                                    > Lesson {{ i+1 }} - <strong>{{ lessonDetailsMap[attendance.lesson]?.date | date:'dd/MM/yyyy' }} - </strong>
+                                    {{ lessonDetailsMap[attendance.lesson]?.status }}
+                                    <span> {{ attendance.isAbsent ? 'Absent' : 'Present' }} </span>
+                                </h4>                              
+                                <h5>{{ lessonDetailsMap[attendance.lesson]?.topic }}</h5>
+                            </li>
+                        </ul>                      
+                        
+                    </ng-container>
+                
+                    <ng-template #noAttendances>
+                        <p>No attendances available.</p>
+                    </ng-template>
                 </div>
 
             </div>
