@@ -4,6 +4,12 @@
     align-items: center;
     padding: 0px 50px;
     border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #141620;
 }
 
 a {

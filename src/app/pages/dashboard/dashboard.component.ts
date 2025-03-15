@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/users/user';
 import { LoginService } from '../../auth/login.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
