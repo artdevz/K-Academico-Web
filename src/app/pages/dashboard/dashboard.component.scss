@@ -1,3 +1,7 @@
+body {
+    margin-top: 70px;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -7,16 +11,17 @@
 }
   
 .grid-item {
-    background-color: #54646f;  
+    background-color: #191f55;  
     color: aliceblue;  
     font-size: 1.25rem;  
-    padding: 2rem;  
+    padding: 1.5rem;  
     border-radius: 1rem;  
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
   
 .grid-item h4 {
@@ -30,7 +35,7 @@
   
 @media (max-width: 1200px) {
     .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
   
@@ -42,7 +47,7 @@
 
 @media (min-width: 1920px) {
     .grid-container {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .grid-item {
