@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Subject } from '../models/subject';
+import { Subject } from '../models/subjects/subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  private api = "http://localhost:8080/api/student";
+  private api = "http://localhost:8080/api/subject";
     
   constructor(private http: HttpClient) {}
 

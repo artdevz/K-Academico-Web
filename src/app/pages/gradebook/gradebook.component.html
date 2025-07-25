@@ -1,0 +1,125 @@
+<div class="container">
+
+    <div class="main-box">
+        <h1>Course Name</h1>
+        <label for="period">Period:</label>
+        <select name="period" id="period">
+            <option value="25.1">25.1</option> <!-- Enum -->
+        </select>
+    </div>
+
+    <div class="enrollee-list">
+
+        <div *ngFor="let enrollee of enrollees; let i = index" class="enrollee">
+            
+            <div class="grade" (click)="toggleDetails(i)">
+                <h2> <strong>{{ enrollee.gradeName }}</strong> </h2>
+                <h3> {{ enrollee.professorName }} </h3>
+                Gráfico Circular das Faltas/Presenças/Pendentes/Abonadas/Futuras com a % das Presenças em Relação as Aulas já passadas.
+            </div>
+
+            <div *ngIf="selectedEnrolleeIndex === i">
+
+                <div class="tabs">
+                    <button (click)="selectTab('summary', i)">Summary</button>
+                    <button (click)="selectTab('evaluations', i)">Evaluations</button>
+                    <button (click)="selectTab('classes', i)">Classes</button>
+                </div>
+
+                <div *ngIf="selectedTab === 'summary'">
+                    <h3>Summary</h3>
+
+                    <ul>                
+                        <li>Avarage: 
+                            <span
+                                [ngClass]="{
+                                    'low-score': enrollee.summary.avarage < 3,
+                                    'medium-low-score': enrollee.summary.avarage >= 3 && enrollee.summary.avarage < 5,
+                                    'medium-score': enrollee.summary.avarage >= 5 && enrollee.summary.avarage < 7,
+                                    'high-score': enrollee.summary.avarage >= 7 && enrollee.summary.avarage < 10,
+                                    'max-score': enrollee.summary.avarage == 10
+                                }"
+                            >{{ enrollee.summary.avarage }}</span>
+                        </li>
+                        <li>Absences: {{ enrollee.summary.absences }}</li>
+                        <li>Status: 
+                            <span [ngClass]="getStatusEEnrollee(enrollee.summary.status)">
+                                {{ enrollee.summary.status }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="selectedTab === 'evaluations'">
+                    <h3>Evaluations</h3>
+                
+                    <ng-container *ngIf="selectedEnrolleeIndex !== null && enrollees?.[selectedEnrolleeIndex] as selectedEnrollee">
+                        <ul *ngIf="selectedEnrollee?.evaluations?.length && selectedEnrollee.evaluations.length > 0; else noEvaluations">
+                            <li *ngFor="let evaluation of getSortedEvaluations()">                               
+                                > <strong>{{ examDetailsMap[evaluation.exam]?.name }}</strong> -
+                                <span
+                                    [ngClass]="{
+                                        'low-score': calculatePercentage(evaluation) < 30,
+                                        'medium-low-score': calculatePercentage(evaluation) >= 30 && calculatePercentage(evaluation) < 50,
+                                        'medium-score': calculatePercentage(evaluation) >= 50 && calculatePercentage(evaluation) < 70,
+                                        'high-score': calculatePercentage(evaluation) >= 70 && calculatePercentage(evaluation) < 100,
+                                        'max-score': calculatePercentage(evaluation) == 100
+                                    }"
+                                >
+                                {{ evaluation.score }}    
+                                </span> 
+                                / {{ examDetailsMap[evaluation.exam]?.maximum }} - 
+                                {{ examDetailsMap[evaluation.exam]?.date | date:'dd/MM/yyyy' }}                                
+                            </li>
+                        </ul>
+                        <h4>
+                            <strong>Avarage</strong>:
+                            <span
+                                [ngClass]="{
+                                    'low-score': enrollee.summary.avarage < 3,
+                                    'medium-low-score': enrollee.summary.avarage >= 3 && enrollee.summary.avarage < 5,
+                                    'medium-score': enrollee.summary.avarage >= 5 && enrollee.summary.avarage < 7,
+                                    'high-score': enrollee.summary.avarage >= 7 && enrollee.summary.avarage < 10,
+                                    'max-score': enrollee.summary.avarage == 10
+                                }"
+                            >
+                            <strong>{{ enrollee.summary.avarage }}</strong>
+                            </span>
+                        </h4>
+                        
+                    </ng-container>
+                
+                    <ng-template #noEvaluations>
+                        <p>No evaluations available.</p>
+                    </ng-template>
+                </div>
+
+                <div *ngIf="selectedTab === 'classes'">
+                    <h3>Classes</h3>
+                    
+                    <ng-container *ngIf="selectedEnrolleeIndex !== null && enrollees?.[selectedEnrolleeIndex] as selectedEnrollee">
+                        <ul *ngIf="selectedEnrollee?.attendances?.length && selectedEnrollee.attendances.length > 0; else noAttendances">
+                            <li *ngFor="let attendance of getSortedAttendances(); let i = index">                               
+                                <h4>
+                                    > Lesson {{ i+1 }} - <strong>{{ lessonDetailsMap[attendance.lesson]?.date | date:'dd/MM/yyyy' }} - </strong>
+                                    {{ lessonDetailsMap[attendance.lesson]?.status }}
+                                    <span> {{ attendance.isAbsent ? 'Absent' : 'Present' }} </span>
+                                </h4>                              
+                                <h5>{{ lessonDetailsMap[attendance.lesson]?.topic }}</h5>
+                            </li>
+                        </ul>                      
+                        
+                    </ng-container>
+                
+                    <ng-template #noAttendances>
+                        <p>No attendances available.</p>
+                    </ng-template>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+</div>

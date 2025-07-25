@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Professor } from '../models/professor';
+import { Professor } from '../models/professors/professor';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfessorService {
 
-  private api = "http://localhost:8080/api/student";
+  private api = "http://localhost:8080/api/professor";
     
   constructor(private http: HttpClient) {}
 

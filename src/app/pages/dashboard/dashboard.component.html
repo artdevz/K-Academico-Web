@@ -1,1 +1,53 @@
-<h3>Overview</h3>
+<h3 class="text-2xl font-bold mb-6">Overview</h3>
+
+<div class="data-container">
+
+    <div class="progress-container">
+      Your Progress: <br>
+      Avarage Progress: <br>
+      Best Progress: <br>
+      Worst Progress: <br>
+    </div>
+    <br>
+    <div class="average-container">
+      Your Academic-Average: {{ userAverage }}<br>
+      Avarage Academic-Average: {{ averageOfAll }}<br>
+      Best Academic-Average: {{ bestAverage }}<br>
+      Worst Academic-Average: {{ worstAverage }}<br>
+    </div>
+    
+  </div>
+
+<div class="grid-container">
+
+  <button class="grid-item" [routerLink]="'/gradebook'">
+    <h4 class="text-2xl">Gradebook</h4>
+    <p class="text-sm">Complete view of subjects, grades, exam results, and absences, allowing you to track academic performance.</p>
+  </button>
+
+  <button class="grid-item" [routerLink]="'/academic-calendar'">
+    <h4 class="text-2xl">Academic Calendar</h4>
+    <p class="text-sm">Calendar with all class days, holidays, and special dates specific to your institution or university.</p>
+  </button>
+
+  <button class="grid-item" [routerLink]="'/personal-schedule'">
+    <h4 class="text-2xl">Personal Schedule</h4>
+    <p class="text-sm">Detailed schedule of your classes during the academic term, including the times and locations of each class.</p>
+  </button>
+
+  <button class="grid-item" [routerLink]="'/curriculum'">
+    <h4 class="text-2xl">Curriculum</h4>
+    <p class="text-sm">The curriculum structure of the student's program, with mandatory and elective courses organized by semester or academic year.</p>
+  </button>
+
+  <button class="grid-item" [routerLink]="'/transcript'">
+    <h4 class="text-2xl">Academic Transcript</h4>
+    <p class="text-sm">Complete record of your grades and courses taken up to the last completed semester, reflecting your academic performance.</p>
+  </button>
+
+  <button class="grid-item" [routerLink]="'/report-card'">
+    <h4 class="text-2xl">Report Card</h4>
+    <p class="text-sm">Detailed information about your grades and attendance in subjects, reflecting your performance in each course.</p>
+  </button>
+
+</div>

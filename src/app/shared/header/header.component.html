@@ -1,1 +1,10 @@
-<p>header works!</p>
+<header class="header">
+    <a href="/">
+        <h1>K-Academic</h1>
+    </a>
+
+    <div class="user-info" *ngIf="userName">
+        <span >Welcome, {{ userName }}</span>
+        <button class="btn-logout" *ngIf="userName" (click)="logout()">Logout</button>
+    </div>
+</header>

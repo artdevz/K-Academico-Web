@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Student } from '../../../models/student';
+import { Student } from '../../../models/students/student';
 import { StudentService } from '../../../services/student.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { StudentService } from '../../../services/student.service';
 export class StudentComponent implements OnInit {
 
   students: Student[] = [];
-  student: Student = new Student("", "", "");
+  student: Student = new Student("", "", "", [], "", 0);
 
   constructor(private studentS: StudentService) {}
 
@@ -25,7 +25,7 @@ export class StudentComponent implements OnInit {
   create(): void {
     this.studentS.create(this.student).subscribe(() => {
       this.readAll();
-      this.student = new Student("", "", "");
+      this.student = new Student("", "", "", [], "", 0);
     });
   }
 

@@ -1,0 +1,13 @@
+<button class="toggleBtn" (click)="toggleSidebar()">☰</button>
+<div class="container" *ngIf="sidebar">
+    <nav>
+        <ul>
+            <li><a routerLink="/gradebook" routerLinkActive="active-link" (click)="toggleSidebar()">Gradebook</a></li>
+            <li><a routerLink="/academic-calendar" routerLinkActive="active-link" (click)="toggleSidebar()">Academic Calendar</a></li>
+            <li><a routerLink="/personal-schedule" routerLinkActive="active-link" (click)="toggleSidebar()">Personal Schedule</a></li>
+            <li><a routerLink="/curriculum" routerLinkActive="active-link" (click)="toggleSidebar()">Curriculum</a></li>
+            <li><a routerLink="/transcript" routerLinkActive="active-link" (click)="toggleSidebar()">Academic Transcript</a></li>
+            <li><a routerLink="/report-card" routerLinkActive="active-link" (click)="toggleSidebar()">Report Card</a></li>
+        </ul>
+    </nav>
+</div>
